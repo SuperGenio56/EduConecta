@@ -1,0 +1,19 @@
+@model EduConecta.ViewModels.EstudianteFormViewModel
+
+@{
+    ViewData["Title"] = "Editar estudiante";
+}
+
+<h1>Editar estudiante</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <partial name="_Formulario" model="Model" />
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

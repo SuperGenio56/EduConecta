@@ -1,0 +1,24 @@
+@model EduConecta.Models.Beca
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="EstudianteId" class="form-label"></label>
+    <select asp-for="EstudianteId" class="form-select"
+            asp-items="@(ViewData["EstudianteId"] as SelectList)">
+        <option value="">Seleccione un estudiante</option>
+    </select>
+    <span asp-validation-for="EstudianteId" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="TipoBeca" class="form-label"></label>
+    <input asp-for="TipoBeca" class="form-control" placeholder="Excelencia academica" />
+    <span asp-validation-for="TipoBeca" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="PorcentajeDescuento" class="form-label"></label>
+    <input asp-for="PorcentajeDescuento" class="form-control" />
+    <span asp-validation-for="PorcentajeDescuento" class="text-danger"></span>
+</div>

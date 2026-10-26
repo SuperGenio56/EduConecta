@@ -1,0 +1,75 @@
+@model EduConecta.Models.Estudiante
+
+@{
+    ViewData["Title"] = "Detalle del estudiante";
+}
+
+<h1>@Model.NombreCompleto</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.FechaNacimiento)</dt>
+    <dd class="col-sm-9">@Model.FechaNacimiento.ToString("dd/MM/yyyy")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Edad)</dt>
+    <dd class="col-sm-9">@Model.Edad</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Sede)</dt>
+    <dd class="col-sm-9">@Model.Sede.NombreCampus</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.DireccionCompleta)</dt>
+    <dd class="col-sm-9">@Model.DireccionCompleta</dd>
+
+    <dt class="col-sm-3">Correos</dt>
+    <dd class="col-sm-9">
+        @if (Model.Correos.Any())
+        {
+            <ul class="mb-0">
+                @foreach (var correo in Model.Correos)
+                {
+                    <li>@correo.Direccion</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <span class="text-muted">Sin correos registrados</span>
+        }
+    </dd>
+
+    <dt class="col-sm-3">Telefonos</dt>
+    <dd class="col-sm-9">
+        @if (Model.Telefonos.Any())
+        {
+            <ul class="mb-0">
+                @foreach (var telefono in Model.Telefonos)
+                {
+                    <li>@telefono.Numero</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <span class="text-muted">Sin telefonos registrados</span>
+        }
+    </dd>
+
+    <dt class="col-sm-3">Becas</dt>
+    <dd class="col-sm-9">
+        @if (Model.Becas.Any())
+        {
+            <ul class="mb-0">
+                @foreach (var beca in Model.Becas)
+                {
+                    <li>@beca.TipoBeca (@beca.PorcentajeDescuento %)</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <span class="text-muted">Sin becas</span>
+        }
+    </dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+<a asp-action="Index" class="btn btn-outline-secondary">Volver</a>

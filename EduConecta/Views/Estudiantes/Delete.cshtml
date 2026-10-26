@@ -1,0 +1,26 @@
+@model EduConecta.Models.Estudiante
+
+@{
+    ViewData["Title"] = "Eliminar estudiante";
+}
+
+<h1 class="text-danger">Eliminar estudiante</h1>
+<p>Esta seguro de eliminar a este estudiante? Se eliminaran tambien sus correos y telefonos.</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Estudiante</dt>
+    <dd class="col-sm-9">@Model.NombreCompleto</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Sede)</dt>
+    <dd class="col-sm-9">@Model.Sede.NombreCampus</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.DireccionCompleta)</dt>
+    <dd class="col-sm-9">@Model.DireccionCompleta</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+</form>

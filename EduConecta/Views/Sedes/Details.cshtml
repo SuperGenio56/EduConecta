@@ -1,0 +1,21 @@
+@model EduConecta.Models.Sede
+
+@{
+    ViewData["Title"] = "Detalle de la sede";
+}
+
+<h1>@Model.NombreCampus</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Ciudad)</dt>
+    <dd class="col-sm-9">@Model.Ciudad</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Pais)</dt>
+    <dd class="col-sm-9">@Model.Pais</dd>
+
+    <dt class="col-sm-3">Estudiantes registrados</dt>
+    <dd class="col-sm-9">@Model.Estudiantes.Count</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+<a asp-action="Index" class="btn btn-outline-secondary">Volver</a>

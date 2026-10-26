@@ -1,0 +1,26 @@
+@model EduConecta.Models.Sede
+
+@{
+    ViewData["Title"] = "Eliminar sede";
+}
+
+<h1 class="text-danger">Eliminar sede</h1>
+<p>Esta seguro de eliminar esta sede?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.NombreCampus)</dt>
+    <dd class="col-sm-9">@Model.NombreCampus</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Ciudad)</dt>
+    <dd class="col-sm-9">@Model.Ciudad</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Pais)</dt>
+    <dd class="col-sm-9">@Model.Pais</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+</form>

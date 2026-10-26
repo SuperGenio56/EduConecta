@@ -1,0 +1,13 @@
+@model EduConecta.ViewModels.ErrorViewModel
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Ocurrio un error</h1>
+<p>Se produjo un error al procesar la solicitud.</p>
+
+@if (Model.ShowRequestId)
+{
+    <p><strong>Identificador de la solicitud:</strong> <code>@Model.RequestId</code></p>
+}

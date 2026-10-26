@@ -1,0 +1,9 @@
+@model int
+
+<label class="form-label" for="tamanoPagina">Mostrar</label>
+<select id="tamanoPagina" name="tamanoPagina" class="form-select" onchange="this.form.submit()">
+    @foreach (var tamano in EduConecta.Helpers.OpcionesPaginacion.Tamanos)
+    {
+        <option value="@tamano" selected="@(tamano == Model)">@tamano por pagina</option>
+    }
+</select>

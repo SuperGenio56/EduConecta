@@ -1,0 +1,72 @@
+@model EduConecta.ViewModels.EstudianteFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <label asp-for="Nombres" class="form-label"></label>
+        <input asp-for="Nombres" class="form-control" />
+        <span asp-validation-for="Nombres" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="ApellidoPaterno" class="form-label"></label>
+        <input asp-for="ApellidoPaterno" class="form-control" />
+        <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="ApellidoMaterno" class="form-label"></label>
+        <input asp-for="ApellidoMaterno" class="form-control" />
+        <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <label asp-for="FechaNacimiento" class="form-label"></label>
+        <input asp-for="FechaNacimiento" type="date" class="form-control" />
+        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="SedeId" class="form-label"></label>
+        <select asp-for="SedeId" class="form-select"
+                asp-items="@(ViewData["SedeId"] as SelectList)">
+            <option value="">Seleccione una sede</option>
+        </select>
+        <span asp-validation-for="SedeId" class="text-danger"></span>
+    </div>
+</div>
+
+<h5 class="mt-3">Direccion</h5>
+<div class="row">
+    <div class="col-md-5 mb-3">
+        <label asp-for="DireccionCalle" class="form-label"></label>
+        <input asp-for="DireccionCalle" class="form-control" />
+        <span asp-validation-for="DireccionCalle" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="DireccionCiudad" class="form-label"></label>
+        <input asp-for="DireccionCiudad" class="form-control" />
+        <span asp-validation-for="DireccionCiudad" class="text-danger"></span>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label asp-for="DireccionPais" class="form-label"></label>
+        <input asp-for="DireccionPais" class="form-control" />
+        <span asp-validation-for="DireccionPais" class="text-danger"></span>
+    </div>
+</div>
+
+<h5 class="mt-3">Contacto</h5>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Correos" class="form-label"></label>
+        <textarea asp-for="Correos" class="form-control" rows="3"
+                  placeholder="juan.perez@univalle.edu"></textarea>
+        <span asp-validation-for="Correos" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="Telefonos" class="form-label"></label>
+        <textarea asp-for="Telefonos" class="form-control" rows="3"
+                  placeholder="70012345"></textarea>
+        <span asp-validation-for="Telefonos" class="text-danger"></span>
+    </div>
+</div>

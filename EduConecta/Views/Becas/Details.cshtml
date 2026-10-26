@@ -1,0 +1,18 @@
+@model EduConecta.Models.Beca
+
+@{
+    ViewData["Title"] = "Detalle de la beca";
+}
+
+<h1>@Model.TipoBeca</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Estudiante)</dt>
+    <dd class="col-sm-9">@Model.Estudiante.NombreCompleto</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.PorcentajeDescuento)</dt>
+    <dd class="col-sm-9">@Model.PorcentajeDescuento.ToString("N2") %</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+<a asp-action="Index" class="btn btn-outline-secondary">Volver</a>

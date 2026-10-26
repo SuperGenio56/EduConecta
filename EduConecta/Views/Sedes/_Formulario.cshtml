@@ -1,0 +1,21 @@
+@model EduConecta.Models.Sede
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="NombreCampus" class="form-label"></label>
+    <input asp-for="NombreCampus" class="form-control" />
+    <span asp-validation-for="NombreCampus" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Ciudad" class="form-label"></label>
+    <input asp-for="Ciudad" class="form-control" />
+    <span asp-validation-for="Ciudad" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Pais" class="form-label"></label>
+    <input asp-for="Pais" class="form-control" />
+    <span asp-validation-for="Pais" class="text-danger"></span>
+</div>

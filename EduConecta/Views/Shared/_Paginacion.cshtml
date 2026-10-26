@@ -1,0 +1,58 @@
+@model EduConecta.Helpers.IListaPaginada
+
+@{
+    var filtros = ViewData["FiltrosActuales"] as Dictionary<string, string>
+                  ?? new Dictionary<string, string>();
+
+    Dictionary<string, string> DatosDeRuta(int pagina)
+    {
+        var datos = new Dictionary<string, string>(filtros);
+        datos["pagina"] = pagina.ToString();
+        datos["tamanoPagina"] = Model.TamanoPagina.ToString();
+        return datos;
+    }
+}
+
+<p class="text-muted">
+    Pagina @Model.PaginaActual de @(Model.TotalPaginas == 0 ? 1 : Model.TotalPaginas) &mdash;
+    @Model.TotalRegistros registro(s)
+</p>
+
+@if (Model.TotalPaginas > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @if (Model.TienePaginaAnterior)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index"
+                       asp-all-route-data="DatosDeRuta(Model.PaginaActual - 1)">Anterior</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+            }
+
+            @for (var pagina = 1; pagina <= Model.TotalPaginas; pagina++)
+            {
+                <li class="page-item @(pagina == Model.PaginaActual ? "active" : "")">
+                    <a class="page-link" asp-action="Index"
+                       asp-all-route-data="DatosDeRuta(pagina)">@pagina</a>
+                </li>
+            }
+
+            @if (Model.TienePaginaSiguiente)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index"
+                       asp-all-route-data="DatosDeRuta(Model.PaginaActual + 1)">Siguiente</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+            }
+        </ul>
+    </nav>
+}

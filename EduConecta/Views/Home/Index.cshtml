@@ -1,0 +1,38 @@
+@model EduConecta.ViewModels.ResumenInicioViewModel
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<h1>EduConecta</h1>
+<p class="text-muted">Sistema de gestion academica. Unidad 3 - Programacion Web III.</p>
+
+<div class="row g-3 mt-2">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Sedes</h5>
+                <p class="display-6">@Model.TotalSedes</p>
+                <a asp-controller="Sedes" asp-action="Index" class="btn btn-outline-primary">Administrar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Estudiantes</h5>
+                <p class="display-6">@Model.TotalEstudiantes</p>
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn btn-outline-primary">Administrar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Becas</h5>
+                <p class="display-6">@Model.TotalBecas</p>
+                <a asp-controller="Becas" asp-action="Index" class="btn btn-outline-primary">Administrar</a>
+            </div>
+        </div>
+    </div>
+</div>
