@@ -1,0 +1,86 @@
+@model EduConecta.ViewModels.Reportes.ReporteOcupacionViewModel
+
+@{
+    ViewData["Title"] = "Ocupacion y recaudacion por curso";
+}
+
+<h1>Ocupacion y recaudacion por curso</h1>
+<p class="text-muted">
+    Inscritos, cupos libres y dinero recaudado en cada curso. No incluye matriculas anuladas.
+</p>
+
+<form asp-action="OcupacionPorCurso" method="get" class="row g-2 align-items-end mb-3">
+    <div class="col-md-3">
+        <label asp-for="PeriodoAcademico" class="form-label">Periodo</label>
+        <select asp-for="PeriodoAcademico" asp-items="Model.Periodos" class="form-select">
+            <option value="">Todos los periodos</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="Modalidad" class="form-label">Modalidad</label>
+        <select asp-for="Modalidad" class="form-select"
+                asp-items="Html.GetEnumSelectList<EduConecta.Models.ModalidadCurso>()">
+            <option value="">Todas</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="SedeId" class="form-label">Sede</label>
+        <select asp-for="SedeId" asp-items="Model.Sedes" class="form-select">
+            <option value="">Todas las sedes</option>
+        </select>
+    </div>
+    <div class="col-md-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Generar</button>
+        <a asp-action="OcupacionPorCurso" class="btn btn-outline-secondary">Limpiar</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-sm">
+    <thead class="table-light">
+        <tr>
+            <th>Codigo</th>
+            <th>Curso</th>
+            <th>Modalidad</th>
+            <th class="text-end">Cupo</th>
+            <th class="text-end">Matriculados</th>
+            <th class="text-end">Disponibles</th>
+            <th class="text-end">Ocupacion</th>
+            <th class="text-end">Bruto</th>
+            <th class="text-end">Descuento</th>
+            <th class="text-end">Neto</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fila in Model.Filas)
+        {
+            <tr>
+                <td>@fila.CodigoCurso</td>
+                <td>@fila.NombreCurso</td>
+                <td>@fila.Modalidad</td>
+                <td class="text-end">@fila.CupoMaximo</td>
+                <td class="text-end">@fila.Matriculados</td>
+                <td class="text-end">@fila.CuposDisponibles</td>
+                <td class="text-end">@fila.PorcentajeOcupacion %</td>
+                <td class="text-end">@fila.MontoBruto.ToString("N2")</td>
+                <td class="text-end">@fila.MontoDescuento.ToString("N2")</td>
+                <td class="text-end">@fila.MontoNeto.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="table-light">
+        <tr>
+            <th colspan="3">Totales</th>
+            <th class="text-end">@Model.TotalCupos</th>
+            <th class="text-end">@Model.TotalMatriculados</th>
+            <th colspan="2"></th>
+            <th class="text-end">@Model.TotalBruto.ToString("N2")</th>
+            <th class="text-end">@Model.TotalDescuento.ToString("N2")</th>
+            <th class="text-end">@Model.TotalNeto.ToString("N2")</th>
+        </tr>
+    </tfoot>
+</table>
+
+@if (!Model.Filas.Any())
+{
+    <div class="alert alert-info">No hay matriculas que cumplan los filtros seleccionados.</div>
+}

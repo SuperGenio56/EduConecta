@@ -18,6 +18,7 @@ public class EduConectaContext : DbContext
     public DbSet<CursoDocente> CursosDocentes => Set<CursoDocente>();
     public DbSet<CursoPrerrequisito> CursosPrerrequisitos => Set<CursoPrerrequisito>();
     public DbSet<Modulo> Modulos => Set<Modulo>();
+    public DbSet<Matricula> Matriculas => Set<Matricula>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

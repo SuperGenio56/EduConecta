@@ -13,7 +13,7 @@ El proyecto implementa el diagrama entidad-relacion elaborado en la Unidad 1
 |---|---|---|
 | Dario Haziel Tambo Parra | SuperGenio56 | Base del proyecto, paginacion, sedes, estudiantes y becas |
 | Julio Cesar Cruz Kübber | Junior02000XD | Docentes, cursos, modulos y prerrequisitos |
-| Nombre del integrante 3 | usuario3 | Matriculas, validaciones y reportes |
+| Diego Emmanuel Gorostiaga Gonzales | EmmanuelUnsc | Matriculas, validaciones y reportes |
 
 ## Requisitos
 

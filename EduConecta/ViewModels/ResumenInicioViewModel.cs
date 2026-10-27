@@ -7,4 +7,5 @@ public class ResumenInicioViewModel
     public int TotalBecas { get; set; }
     public int TotalDocentes { get; set; }
     public int TotalCursos { get; set; }
+    public int TotalMatriculas { get; set; }
 }

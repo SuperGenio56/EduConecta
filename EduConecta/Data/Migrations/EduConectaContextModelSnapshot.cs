@@ -333,6 +333,59 @@ namespace EduConecta.Data.Migrations
                     b.ToTable("Estudiantes", (string)null);
                 });
 
+            modelBuilder.Entity("EduConecta.Models.Matricula", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BecaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("EstudianteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaMatricula")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("date")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<decimal?>("NotaFinal")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<string>("PeriodoAcademico")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BecaId");
+
+                    b.HasIndex("CursoId");
+
+                    b.HasIndex("PeriodoAcademico");
+
+                    b.HasIndex("EstudianteId", "CursoId", "PeriodoAcademico")
+                        .IsUnique();
+
+                    b.ToTable("Matriculas", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Matriculas_NotaFinal", "[NotaFinal] IS NULL OR ([NotaFinal] >= 0 AND [NotaFinal] <= 100)");
+                        });
+                });
+
             modelBuilder.Entity("EduConecta.Models.Modulo", b =>
                 {
                     b.Property<int>("CursoId")
@@ -534,6 +587,32 @@ namespace EduConecta.Data.Migrations
                     b.Navigation("Sede");
                 });
 
+            modelBuilder.Entity("EduConecta.Models.Matricula", b =>
+                {
+                    b.HasOne("EduConecta.Models.Beca", "Beca")
+                        .WithMany("Matriculas")
+                        .HasForeignKey("BecaId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("EduConecta.Models.Curso", "Curso")
+                        .WithMany("Matriculas")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EduConecta.Models.Estudiante", "Estudiante")
+                        .WithMany("Matriculas")
+                        .HasForeignKey("EstudianteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Beca");
+
+                    b.Navigation("Curso");
+
+                    b.Navigation("Estudiante");
+                });
+
             modelBuilder.Entity("EduConecta.Models.Modulo", b =>
                 {
                     b.HasOne("EduConecta.Models.Curso", "Curso")
@@ -556,11 +635,18 @@ namespace EduConecta.Data.Migrations
                     b.Navigation("Estudiante");
                 });
 
+            modelBuilder.Entity("EduConecta.Models.Beca", b =>
+                {
+                    b.Navigation("Matriculas");
+                });
+
             modelBuilder.Entity("EduConecta.Models.Curso", b =>
                 {
                     b.Navigation("CursoDocentes");
 
                     b.Navigation("EsPrerrequisitoDe");
+
+                    b.Navigation("Matriculas");
 
                     b.Navigation("Modulos");
 
@@ -577,6 +663,8 @@ namespace EduConecta.Data.Migrations
                     b.Navigation("Becas");
 
                     b.Navigation("Correos");
+
+                    b.Navigation("Matriculas");
 
                     b.Navigation("Telefonos");
                 });

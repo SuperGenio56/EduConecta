@@ -23,7 +23,8 @@ public class HomeController : Controller
             TotalEstudiantes = await _context.Estudiantes.CountAsync(),
             TotalBecas = await _context.Becas.CountAsync(),
             TotalDocentes = await _context.Docentes.CountAsync(),
-            TotalCursos = await _context.Cursos.CountAsync()
+            TotalCursos = await _context.Cursos.CountAsync(),
+            TotalMatriculas = await _context.Matriculas.CountAsync()
         };
 
         return View(resumen);

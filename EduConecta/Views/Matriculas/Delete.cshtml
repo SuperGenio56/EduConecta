@@ -1,0 +1,29 @@
+@model EduConecta.Models.Matricula
+
+@{
+    ViewData["Title"] = "Eliminar matricula";
+}
+
+<h1 class="text-danger">Eliminar matricula</h1>
+<p>Esta seguro de eliminar esta matricula?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Estudiante)</dt>
+    <dd class="col-sm-9">@Model.Estudiante.NombreCompleto</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Curso)</dt>
+    <dd class="col-sm-9">@Model.Curso.NombreCurso</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.PeriodoAcademico)</dt>
+    <dd class="col-sm-9">@Model.PeriodoAcademico</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Estado)</dt>
+    <dd class="col-sm-9">@Model.Estado</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+</form>

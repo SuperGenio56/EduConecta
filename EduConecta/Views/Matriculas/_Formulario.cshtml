@@ -1,0 +1,57 @@
+@model EduConecta.Models.Matricula
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="EstudianteId" class="form-label"></label>
+    <select asp-for="EstudianteId" class="form-select"
+            asp-items="@(ViewData["EstudianteId"] as SelectList)">
+        <option value="">Seleccione un estudiante</option>
+    </select>
+    <span asp-validation-for="EstudianteId" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="CursoId" class="form-label"></label>
+    <select asp-for="CursoId" class="form-select"
+            asp-items="@(ViewData["CursoId"] as SelectList)">
+        <option value="">Seleccione un curso</option>
+    </select>
+    <span asp-validation-for="CursoId" class="text-danger"></span>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="PeriodoAcademico" class="form-label"></label>
+        <input asp-for="PeriodoAcademico" class="form-control" placeholder="2026-2" />
+        <span asp-validation-for="PeriodoAcademico" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="FechaMatricula" class="form-label"></label>
+        <input asp-for="FechaMatricula" class="form-control" />
+        <span asp-validation-for="FechaMatricula" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Estado" class="form-label"></label>
+        <select asp-for="Estado" class="form-select"
+                asp-items="Html.GetEnumSelectList<EstadoMatricula>()"></select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="NotaFinal" class="form-label"></label>
+        <input asp-for="NotaFinal" class="form-control" />
+        <span asp-validation-for="NotaFinal" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label asp-for="BecaId" class="form-label"></label>
+    <select asp-for="BecaId" class="form-select"
+            asp-items="@(ViewData["BecaId"] as SelectList)">
+        <option value="">Sin beca</option>
+    </select>
+    <span asp-validation-for="BecaId" class="text-danger"></span>
+</div>

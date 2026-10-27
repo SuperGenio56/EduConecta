@@ -19,4 +19,6 @@ public class Beca
     public int EstudianteId { get; set; }
 
     public Estudiante Estudiante { get; set; } = null!;
+
+    public ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
 }

@@ -33,4 +33,5 @@ public class Curso
     public ICollection<CursoDocente> CursoDocentes { get; set; } = new List<CursoDocente>();
     public ICollection<CursoPrerrequisito> Prerrequisitos { get; set; } = new List<CursoPrerrequisito>();
     public ICollection<CursoPrerrequisito> EsPrerrequisitoDe { get; set; } = new List<CursoPrerrequisito>();
+    public ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
 }

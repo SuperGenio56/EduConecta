@@ -48,6 +48,7 @@ public class Estudiante
     public ICollection<CorreoEstudiante> Correos { get; set; } = new List<CorreoEstudiante>();
     public ICollection<TelefonoEstudiante> Telefonos { get; set; } = new List<TelefonoEstudiante>();
     public ICollection<Beca> Becas { get; set; } = new List<Beca>();
+    public ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
 
     [NotMapped]
     [Display(Name = "Estudiante")]

@@ -1,0 +1,41 @@
+@model EduConecta.Models.Matricula
+
+@{
+    ViewData["Title"] = "Detalle de la matricula";
+}
+
+<h1>Matricula de @Model.Estudiante.NombreCompleto</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Curso)</dt>
+    <dd class="col-sm-9">@Model.Curso.CodigoCurso - @Model.Curso.NombreCurso</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.PeriodoAcademico)</dt>
+    <dd class="col-sm-9">@Model.PeriodoAcademico</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.FechaMatricula)</dt>
+    <dd class="col-sm-9">@Model.FechaMatricula.ToString("dd/MM/yyyy")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Estado)</dt>
+    <dd class="col-sm-9">@Model.Estado</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.NotaFinal)</dt>
+    <dd class="col-sm-9">@(Model.NotaFinal?.ToString("N2") ?? "Sin nota")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Beca)</dt>
+    <dd class="col-sm-9">
+        @(Model.Beca == null ? "Sin beca" : $"{Model.Beca.TipoBeca} ({Model.Beca.PorcentajeDescuento:N2} %)")
+    </dd>
+
+    <dt class="col-sm-3">Costo del curso</dt>
+    <dd class="col-sm-9">@Model.Curso.CostoMatricula.ToString("N2")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.MontoBecado)</dt>
+    <dd class="col-sm-9">@Model.MontoBecado.ToString("N2")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.MontoAPagar)</dt>
+    <dd class="col-sm-9">@Model.MontoAPagar.ToString("N2")</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+<a asp-action="Index" class="btn btn-outline-secondary">Volver</a>

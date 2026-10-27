@@ -1,0 +1,81 @@
+@model EduConecta.ViewModels.Reportes.ReporteBecasViewModel
+
+@{
+    ViewData["Title"] = "Becas otorgadas y descuentos aplicados";
+}
+
+<h1>Becas otorgadas y descuentos aplicados</h1>
+<p class="text-muted">
+    Matriculas que usaron cada beca y dinero descontado. No incluye matriculas anuladas.
+</p>
+
+<form asp-action="BecasAplicadas" method="get" class="row g-2 align-items-end mb-3">
+    <div class="col-md-2">
+        <label asp-for="Desde" class="form-label">Desde</label>
+        <input asp-for="Desde" type="date" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <label asp-for="Hasta" class="form-label">Hasta</label>
+        <input asp-for="Hasta" type="date" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label asp-for="TipoBeca" class="form-label">Tipo de beca</label>
+        <select asp-for="TipoBeca" asp-items="Model.TiposDeBeca" class="form-select">
+            <option value="">Todos los tipos</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label asp-for="SedeId" class="form-label">Sede</label>
+        <select asp-for="SedeId" asp-items="Model.Sedes" class="form-select">
+            <option value="">Todas las sedes</option>
+        </select>
+    </div>
+    <div class="col-md-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Generar</button>
+        <a asp-action="BecasAplicadas" class="btn btn-outline-secondary">Limpiar</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-sm">
+    <thead class="table-light">
+        <tr>
+            <th>Estudiante</th>
+            <th>Campus</th>
+            <th>Tipo de beca</th>
+            <th class="text-end">Porcentaje</th>
+            <th class="text-end">Matriculas becadas</th>
+            <th class="text-end">Bruto</th>
+            <th class="text-end">Becado</th>
+            <th class="text-end">A pagar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fila in Model.Filas)
+        {
+            <tr>
+                <td>@fila.Estudiante</td>
+                <td>@fila.NombreCampus</td>
+                <td>@fila.TipoBeca</td>
+                <td class="text-end">@fila.PorcentajeDescuento.ToString("N2") %</td>
+                <td class="text-end">@fila.MatriculasBecadas</td>
+                <td class="text-end">@fila.MontoBruto.ToString("N2")</td>
+                <td class="text-end">@fila.MontoBecado.ToString("N2")</td>
+                <td class="text-end">@fila.MontoAPagar.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="table-light">
+        <tr>
+            <th colspan="4">Totales</th>
+            <th class="text-end">@Model.TotalMatriculasBecadas</th>
+            <th class="text-end">@Model.TotalBruto.ToString("N2")</th>
+            <th class="text-end">@Model.TotalBecado.ToString("N2")</th>
+            <th class="text-end">@Model.TotalAPagar.ToString("N2")</th>
+        </tr>
+    </tfoot>
+</table>
+
+@if (!Model.Filas.Any())
+{
+    <div class="alert alert-info">No hay becas aplicadas que cumplan los filtros seleccionados.</div>
+}
