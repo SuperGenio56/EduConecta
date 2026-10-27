@@ -35,4 +35,22 @@
             </div>
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Docentes</h5>
+                <p class="display-6">@Model.TotalDocentes</p>
+                <a asp-controller="Docentes" asp-action="Index" class="btn btn-outline-primary">Administrar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Cursos</h5>
+                <p class="display-6">@Model.TotalCursos</p>
+                <a asp-controller="Cursos" asp-action="Index" class="btn btn-outline-primary">Administrar</a>
+            </div>
+        </div>
+    </div>
 </div>

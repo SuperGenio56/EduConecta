@@ -1,0 +1,57 @@
+@model EduConecta.Models.Curso
+
+@{
+    ViewData["Title"] = "Detalle del curso";
+}
+
+<h1>@Model.CodigoCurso - @Model.NombreCurso</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Creditos)</dt>
+    <dd class="col-sm-9">@Model.Creditos</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Modalidad)</dt>
+    <dd class="col-sm-9">@Model.Modalidad</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.CupoMaximo)</dt>
+    <dd class="col-sm-9">@Model.CupoMaximo</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.CostoMatricula)</dt>
+    <dd class="col-sm-9">Bs @Model.CostoMatricula.ToString("N2")</dd>
+
+    <dt class="col-sm-3">Docentes</dt>
+    <dd class="col-sm-9">
+        @string.Join(", ", Model.CursoDocentes.Select(cd => cd.Docente.NombreCompleto).OrderBy(n => n))
+    </dd>
+
+    <dt class="col-sm-3">Prerrequisitos</dt>
+    <dd class="col-sm-9">
+        @if (Model.Prerrequisitos.Any())
+        {
+            @string.Join(", ", Model.Prerrequisitos.Select(cp => cp.Prerrequisito.NombreCurso))
+        }
+        else
+        {
+            <span class="text-muted">Ninguno</span>
+        }
+    </dd>
+
+    <dt class="col-sm-3">Es prerrequisito de</dt>
+    <dd class="col-sm-9">
+        @if (Model.EsPrerrequisitoDe.Any())
+        {
+            @string.Join(", ", Model.EsPrerrequisitoDe.Select(cp => cp.Curso.NombreCurso))
+        }
+        else
+        {
+            <span class="text-muted">Ningun curso</span>
+        }
+    </dd>
+
+    <dt class="col-sm-3">Modulos</dt>
+    <dd class="col-sm-9">@Model.Modulos.Count modulo(s), @Model.Modulos.Sum(m => m.HorasEstimadas) horas</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+<a asp-controller="Modulos" asp-action="Index" asp-route-cursoId="@Model.Id" class="btn btn-outline-primary">Ver modulos</a>
+<a asp-action="Index" class="btn btn-outline-secondary">Volver</a>

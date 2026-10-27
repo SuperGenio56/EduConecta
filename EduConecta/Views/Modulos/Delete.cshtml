@@ -1,0 +1,29 @@
+@model EduConecta.Models.Modulo
+
+@{
+    ViewData["Title"] = "Eliminar modulo";
+}
+
+<h1 class="text-danger">Eliminar modulo</h1>
+<p>Esta seguro de eliminar este modulo?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Curso</dt>
+    <dd class="col-sm-9">@Model.Curso.NombreCurso</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.NumeroModulo)</dt>
+    <dd class="col-sm-9">@Model.NumeroModulo</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.NombreModulo)</dt>
+    <dd class="col-sm-9">@Model.NombreModulo</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.HorasEstimadas)</dt>
+    <dd class="col-sm-9">@Model.HorasEstimadas</dd>
+</dl>
+
+<form asp-action="Delete" asp-route-cursoId="@Model.CursoId"
+      asp-route-numeroModulo="@Model.NumeroModulo" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" asp-route-cursoId="@Model.CursoId" class="btn btn-outline-secondary">Cancelar</a>
+</form>

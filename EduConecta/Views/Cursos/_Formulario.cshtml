@@ -1,0 +1,57 @@
+@model EduConecta.ViewModels.CursoFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <label asp-for="CodigoCurso" class="form-label"></label>
+        <input asp-for="CodigoCurso" class="form-control" placeholder="WEB-301" />
+        <span asp-validation-for="CodigoCurso" class="text-danger"></span>
+    </div>
+    <div class="col-md-8 mb-3">
+        <label asp-for="NombreCurso" class="form-label"></label>
+        <input asp-for="NombreCurso" class="form-control" />
+        <span asp-validation-for="NombreCurso" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 mb-3">
+        <label asp-for="Creditos" class="form-label"></label>
+        <input asp-for="Creditos" class="form-control" />
+        <span asp-validation-for="Creditos" class="text-danger"></span>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label asp-for="Modalidad" class="form-label"></label>
+        <select asp-for="Modalidad" class="form-select"
+                asp-items="Html.GetEnumSelectList<ModalidadCurso>()"></select>
+        <span asp-validation-for="Modalidad" class="text-danger"></span>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label asp-for="CupoMaximo" class="form-label"></label>
+        <input asp-for="CupoMaximo" class="form-control" />
+        <span asp-validation-for="CupoMaximo" class="text-danger"></span>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label asp-for="CostoMatricula" class="form-label"></label>
+        <input asp-for="CostoMatricula" class="form-control" />
+        <span asp-validation-for="CostoMatricula" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="DocentesSeleccionados" class="form-label"></label>
+        <select asp-for="DocentesSeleccionados" asp-items="Model.Docentes"
+                class="form-select" size="5" multiple></select>
+        <div class="form-text">Mantenga Ctrl presionado para elegir varios.</div>
+        <span asp-validation-for="DocentesSeleccionados" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="PrerrequisitosSeleccionados" class="form-label"></label>
+        <select asp-for="PrerrequisitosSeleccionados" asp-items="Model.CursosDisponibles"
+                class="form-select" size="5" multiple></select>
+        <div class="form-text">Opcional. Mantenga Ctrl presionado para elegir varios.</div>
+        <span asp-validation-for="PrerrequisitosSeleccionados" class="text-danger"></span>
+    </div>
+</div>

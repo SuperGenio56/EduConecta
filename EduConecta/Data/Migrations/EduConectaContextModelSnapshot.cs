@@ -79,6 +79,208 @@ namespace EduConecta.Data.Migrations
                     b.ToTable("CorreosEstudiante", (string)null);
                 });
 
+            modelBuilder.Entity("EduConecta.Models.Curso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CodigoCurso")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<decimal>("CostoMatricula")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("Creditos")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CupoMaximo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Modalidad")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("NombreCurso")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CodigoCurso")
+                        .IsUnique();
+
+                    b.ToTable("Cursos", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Cursos_CupoMaximo", "[CupoMaximo] BETWEEN 1 AND 500");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CodigoCurso = "WEB-301",
+                            CostoMatricula = 750m,
+                            Creditos = 4,
+                            CupoMaximo = 30,
+                            Modalidad = "Presencial",
+                            NombreCurso = "Programacion Web III"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CodigoCurso = "WEB-201",
+                            CostoMatricula = 700m,
+                            Creditos = 4,
+                            CupoMaximo = 35,
+                            Modalidad = "Presencial",
+                            NombreCurso = "Programacion Web II"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CodigoCurso = "BD-301",
+                            CostoMatricula = 800m,
+                            Creditos = 4,
+                            CupoMaximo = 25,
+                            Modalidad = "Hibrida",
+                            NombreCurso = "Base de Datos III"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CodigoCurso = "RED-101",
+                            CostoMatricula = 600m,
+                            Creditos = 3,
+                            CupoMaximo = 40,
+                            Modalidad = "Virtual",
+                            NombreCurso = "Fundamentos de Redes"
+                        });
+                });
+
+            modelBuilder.Entity("EduConecta.Models.CursoDocente", b =>
+                {
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DocenteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CursoId", "DocenteId");
+
+                    b.HasIndex("DocenteId");
+
+                    b.ToTable("CursosDocentes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CursoId = 1,
+                            DocenteId = 1
+                        },
+                        new
+                        {
+                            CursoId = 2,
+                            DocenteId = 1
+                        },
+                        new
+                        {
+                            CursoId = 3,
+                            DocenteId = 2
+                        },
+                        new
+                        {
+                            CursoId = 4,
+                            DocenteId = 3
+                        });
+                });
+
+            modelBuilder.Entity("EduConecta.Models.CursoPrerrequisito", b =>
+                {
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrerrequisitoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CursoId", "PrerrequisitoId");
+
+                    b.HasIndex("PrerrequisitoId");
+
+                    b.ToTable("CursosPrerrequisitos", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_CursosPrerrequisitos_NoEsPrerrequisitoDeSiMismo", "[CursoId] <> [PrerrequisitoId]");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            CursoId = 1,
+                            PrerrequisitoId = 2
+                        });
+                });
+
+            modelBuilder.Entity("EduConecta.Models.Docente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
+                    b.Property<string>("Especialidad")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("NombreCompleto")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Correo")
+                        .IsUnique();
+
+                    b.ToTable("Docentes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Correo = "aacebo@educonecta.edu.bo",
+                            Especialidad = "Desarrollo web",
+                            NombreCompleto = "Agustin Acebo Pedraza"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Correo = "lmendoza@educonecta.edu.bo",
+                            Especialidad = "Bases de datos",
+                            NombreCompleto = "Lucia Mendoza Rojas"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Correo = "iquispe@educonecta.edu.bo",
+                            Especialidad = "Redes",
+                            NombreCompleto = "Ivan Quispe Flores"
+                        });
+                });
+
             modelBuilder.Entity("EduConecta.Models.Estudiante", b =>
                 {
                     b.Property<int>("Id")
@@ -129,6 +331,58 @@ namespace EduConecta.Data.Migrations
                     b.HasIndex("ApellidoPaterno", "ApellidoMaterno", "Nombres");
 
                     b.ToTable("Estudiantes", (string)null);
+                });
+
+            modelBuilder.Entity("EduConecta.Models.Modulo", b =>
+                {
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumeroModulo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Contenido")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("HorasEstimadas")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreModulo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("CursoId", "NumeroModulo");
+
+                    b.ToTable("Modulos", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CursoId = 1,
+                            NumeroModulo = 1,
+                            Contenido = "Patron MVC, rutas, controladores y vistas",
+                            HorasEstimadas = 20,
+                            NombreModulo = "Fundamentos de MVC"
+                        },
+                        new
+                        {
+                            CursoId = 1,
+                            NumeroModulo = 2,
+                            Contenido = "DbContext, migraciones y Fluent API",
+                            HorasEstimadas = 24,
+                            NombreModulo = "Entity Framework Core"
+                        },
+                        new
+                        {
+                            CursoId = 3,
+                            NumeroModulo = 1,
+                            Contenido = "Normalizacion y restricciones",
+                            HorasEstimadas = 18,
+                            NombreModulo = "Modelo relacional"
+                        });
                 });
 
             modelBuilder.Entity("EduConecta.Models.Sede", b =>
@@ -231,6 +485,44 @@ namespace EduConecta.Data.Migrations
                     b.Navigation("Estudiante");
                 });
 
+            modelBuilder.Entity("EduConecta.Models.CursoDocente", b =>
+                {
+                    b.HasOne("EduConecta.Models.Curso", "Curso")
+                        .WithMany("CursoDocentes")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduConecta.Models.Docente", "Docente")
+                        .WithMany("CursoDocentes")
+                        .HasForeignKey("DocenteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+
+                    b.Navigation("Docente");
+                });
+
+            modelBuilder.Entity("EduConecta.Models.CursoPrerrequisito", b =>
+                {
+                    b.HasOne("EduConecta.Models.Curso", "Curso")
+                        .WithMany("Prerrequisitos")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduConecta.Models.Curso", "Prerrequisito")
+                        .WithMany("EsPrerrequisitoDe")
+                        .HasForeignKey("PrerrequisitoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+
+                    b.Navigation("Prerrequisito");
+                });
+
             modelBuilder.Entity("EduConecta.Models.Estudiante", b =>
                 {
                     b.HasOne("EduConecta.Models.Sede", "Sede")
@@ -242,6 +534,17 @@ namespace EduConecta.Data.Migrations
                     b.Navigation("Sede");
                 });
 
+            modelBuilder.Entity("EduConecta.Models.Modulo", b =>
+                {
+                    b.HasOne("EduConecta.Models.Curso", "Curso")
+                        .WithMany("Modulos")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+                });
+
             modelBuilder.Entity("EduConecta.Models.TelefonoEstudiante", b =>
                 {
                     b.HasOne("EduConecta.Models.Estudiante", "Estudiante")
@@ -251,6 +554,22 @@ namespace EduConecta.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Estudiante");
+                });
+
+            modelBuilder.Entity("EduConecta.Models.Curso", b =>
+                {
+                    b.Navigation("CursoDocentes");
+
+                    b.Navigation("EsPrerrequisitoDe");
+
+                    b.Navigation("Modulos");
+
+                    b.Navigation("Prerrequisitos");
+                });
+
+            modelBuilder.Entity("EduConecta.Models.Docente", b =>
+                {
+                    b.Navigation("CursoDocentes");
                 });
 
             modelBuilder.Entity("EduConecta.Models.Estudiante", b =>

@@ -1,0 +1,34 @@
+@model EduConecta.Models.Docente
+
+@{
+    ViewData["Title"] = "Eliminar docente";
+}
+
+<h1 class="text-danger">Eliminar docente</h1>
+<p>Esta seguro de eliminar este docente?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.NombreCompleto)</dt>
+    <dd class="col-sm-9">@Model.NombreCompleto</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Especialidad)</dt>
+    <dd class="col-sm-9">@Model.Especialidad</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Correo)</dt>
+    <dd class="col-sm-9">@Model.Correo</dd>
+</dl>
+
+@if (Model.CursoDocentes.Any())
+{
+    <div class="alert alert-warning">
+        El docente se quitara de los cursos que imparte:
+        @string.Join(", ", Model.CursoDocentes.Select(cd => cd.Curso.NombreCurso)).
+    </div>
+}
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+</form>

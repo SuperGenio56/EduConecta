@@ -1,0 +1,23 @@
+@model EduConecta.Models.Modulo
+
+@{
+    ViewData["Title"] = "Nuevo modulo";
+}
+
+<h1>Nuevo modulo</h1>
+<p class="text-muted">Curso: @ViewData["Curso"]</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" asp-route-cursoId="@Model.CursoId" method="post">
+            @Html.AntiForgeryToken()
+            <partial name="_Formulario" model="Model" />
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="Index" asp-route-cursoId="@Model.CursoId" class="btn btn-outline-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

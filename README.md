@@ -12,7 +12,7 @@ El proyecto implementa el diagrama entidad-relacion elaborado en la Unidad 1
 | Integrante | Usuario de GitHub | Aporte principal |
 |---|---|---|
 | Dario Haziel Tambo Parra | SuperGenio56 | Base del proyecto, paginacion, sedes, estudiantes y becas |
-| Nombre del integrante 2 | usuario2 | Docentes, cursos, modulos y prerrequisitos |
+| Julio Cesar Cruz Kübber | Junior02000XD | Docentes, cursos, modulos y prerrequisitos |
 | Nombre del integrante 3 | usuario3 | Matriculas, validaciones y reportes |
 
 ## Requisitos
@@ -25,7 +25,7 @@ El proyecto implementa el diagrama entidad-relacion elaborado en la Unidad 1
 
 1. Clonar el repositorio:
 
-       git clone https://github.com/USUARIO/EduConecta.git
+       git clone https://github.com/SuperGenio56/EduConecta.git
 
 2. Abrir `EduConecta.sln`.
 

@@ -1,0 +1,29 @@
+@model EduConecta.Models.Modulo
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<input type="hidden" asp-for="CursoId" />
+
+<div class="mb-3">
+    <label asp-for="NumeroModulo" class="form-label"></label>
+    <input asp-for="NumeroModulo" class="form-control" readonly="@(ViewData["NumeroFijo"] != null)" />
+    <span asp-validation-for="NumeroModulo" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="NombreModulo" class="form-label"></label>
+    <input asp-for="NombreModulo" class="form-control" />
+    <span asp-validation-for="NombreModulo" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Contenido" class="form-label"></label>
+    <textarea asp-for="Contenido" class="form-control" rows="3"></textarea>
+    <span asp-validation-for="Contenido" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="HorasEstimadas" class="form-label"></label>
+    <input asp-for="HorasEstimadas" class="form-control" />
+    <span asp-validation-for="HorasEstimadas" class="text-danger"></span>
+</div>

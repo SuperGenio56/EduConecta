@@ -1,5 +1,9 @@
+using System.Globalization;
 using EduConecta.Data;
 using Microsoft.EntityFrameworkCore;
+
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 var builder = WebApplication.CreateBuilder(args);
 

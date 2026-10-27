@@ -1,0 +1,21 @@
+@model EduConecta.Models.Docente
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="NombreCompleto" class="form-label"></label>
+    <input asp-for="NombreCompleto" class="form-control" />
+    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Especialidad" class="form-label"></label>
+    <input asp-for="Especialidad" class="form-control" />
+    <span asp-validation-for="Especialidad" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Correo" class="form-label"></label>
+    <input asp-for="Correo" class="form-control" placeholder="nombre@educonecta.edu.bo" />
+    <span asp-validation-for="Correo" class="text-danger"></span>
+</div>

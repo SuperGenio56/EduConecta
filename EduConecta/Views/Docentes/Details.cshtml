@@ -1,0 +1,34 @@
+@model EduConecta.Models.Docente
+
+@{
+    ViewData["Title"] = "Detalle del docente";
+}
+
+<h1>@Model.NombreCompleto</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Especialidad)</dt>
+    <dd class="col-sm-9">@Model.Especialidad</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Correo)</dt>
+    <dd class="col-sm-9">@Model.Correo</dd>
+</dl>
+
+<h4>Cursos que imparte</h4>
+
+@if (Model.CursoDocentes.Any())
+{
+    <ul>
+        @foreach (var asignacion in Model.CursoDocentes.OrderBy(cd => cd.Curso.NombreCurso))
+        {
+            <li>@asignacion.Curso.CodigoCurso - @asignacion.Curso.NombreCurso</li>
+        }
+    </ul>
+}
+else
+{
+    <p class="text-muted">Todavia no tiene cursos asignados.</p>
+}
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+<a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
